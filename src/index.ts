@@ -5,7 +5,7 @@ import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import UserRoutes from './routers/UserRoutes';
+import UserRoutes from './routers/user/UserRoutes';
 
 class App {
   public app: Application;
@@ -29,7 +29,7 @@ class App {
       res.send('Hi this test restful api');
     });
 
-    this.app.use('/users', UserRoutes);
+    this.app.use('/api/v1/users', UserRoutes);
   }
 }
 

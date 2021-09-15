@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import IController from '../ControllerInterface';
+
+import IController from '../../interfaces/ControllerInterface';
 
 let data: any[] = [
   { id: 1, name: 'Adi' },

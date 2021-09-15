@@ -1,15 +1,7 @@
-import { Router } from "express";
-import IRouter from "../../interfaces/RouterInterface";
-
+import BaseRoutes from "../BaseRoutes";
 import UserController from "../../controllers/user/UserController";
 
-class UserRoutes implements IRouter {
-  public router: Router;
-
-  constructor() {
-    this.router = Router();
-    this.routes();
-  }
+class UserRoutes extends BaseRoutes {
 
   public routes(): void {
     this.router.get('/', UserController.getAll);
@@ -18,6 +10,7 @@ class UserRoutes implements IRouter {
     this.router.put('/:id', UserController.update);
     this.router.delete('/:id', UserController.delete);
   }
+
 }
 
 export default new UserRoutes().router;

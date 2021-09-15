@@ -1,5 +1,5 @@
-import { Router, Request, Response } from "express";
-import IRouter from "../RouterInterface";
+import { Router } from "express";
+import IRouter from "../../interfaces/RouterInterface";
 
 import UserController from "../../controllers/user/UserController";
 

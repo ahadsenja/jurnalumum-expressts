@@ -39,7 +39,11 @@ class UserController implements IController {
   }
 
   delete(req: Request, res: Response): Response {
-    throw new Error('Method not implemented.');
+    const { id } = req.params;
+
+    let person = data.filter(item => item.id != id);
+
+    return res.send(person);
   }
 }
 

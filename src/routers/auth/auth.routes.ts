@@ -1,5 +1,5 @@
-import BaseRoutes from '../BaseRoutes';
-import AuthController from '../../controllers/auth/AuthController';
+import BaseRoutes from '../base.routes';
+import AuthController from '../../controllers/auth/auth.controller';
 
 class AuthRoutes extends BaseRoutes {
 

@@ -4,8 +4,9 @@ import morgan from 'morgan';
 import compression from 'compression';
 import helmet from 'helmet';
 import cors from 'cors';
+import { config as dotenv } from 'dotenv';
 
-import UserRoutes from './routers/user/UserRoutes';
+import UserRoutes from './routers/user/user.routes';
 
 class App {
   public app: Application;
@@ -14,6 +15,7 @@ class App {
     this.app = express();
     this.plugins();
     this.routes();
+    dotenv();
   }
 
   protected plugins(): void {
@@ -37,4 +39,5 @@ const port: number = 8000;
 const app = new App().app;
 app.listen(port, () => {
   console.log('This app is running on port ' + port);
+  console.log(process.env.DB_HOST);
 })

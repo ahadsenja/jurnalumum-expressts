@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import IController from '../../interfaces/ControllerInterface';
+import IController from '../../interfaces/controller.interface';
 
 let data: any[] = [
   { id: 1, name: 'Adi' },
@@ -11,6 +11,7 @@ let data: any[] = [
 
 class UserController implements IController {
   getAll(req: Request, res: Response): Response {
+    console.log('Ini adalah user controller')
     return res.send(data);
   }
 

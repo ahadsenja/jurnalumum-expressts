@@ -7,6 +7,7 @@ import cors from 'cors';
 import { config as dotenv } from 'dotenv';
 
 import UserRoutes from './routers/user/user.routes';
+import AuthRoutes from './routers/auth/auth.routes';
 
 class App {
   public app: Application;
@@ -32,6 +33,7 @@ class App {
     });
 
     this.app.use('/api/v1/users', UserRoutes);
+    this.app.use('/api/v1/auth', AuthRoutes);
   }
 }
 
@@ -39,5 +41,4 @@ const port: number = 8000;
 const app = new App().app;
 app.listen(port, () => {
   console.log('This app is running on port ' + port);
-  console.log(process.env.DB_HOST);
 })

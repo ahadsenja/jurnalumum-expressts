@@ -10,6 +10,7 @@ let data: any[] = [
 ]
 
 class UserController implements IController {
+
   getAll(req: Request, res: Response): Response {
     console.log('Ini adalah user controller')
     return res.send(data);
@@ -47,6 +48,7 @@ class UserController implements IController {
 
     return res.send(person);
   }
+
 }
 
 export default new UserController;

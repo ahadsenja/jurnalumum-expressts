@@ -3,8 +3,15 @@ import { Request, Response } from 'express';
 const db = require('../../db/models');
 
 class TransactionController {
-  getAll(req: Request, res: Response): Response {
-    return res.send('Get all transaction');
+  getAll = async (req: Request, res: Response): Promise<Response> => {
+    const transactions = await db.transaction.findAll({
+      attributes: ['id', 'date', 'description', 'debit', 'credit', 'jurnal_id']
+    })
+
+    return res.send({
+      data: transactions,
+      message: ''
+    });
   }
 
   getById(req: Request, res: Response): Response {

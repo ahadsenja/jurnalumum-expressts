@@ -32,11 +32,7 @@ class TransactionController {
     const { jurnal_id, date, description, debit, credit } = req.body;
 
     const transaction = await db.transaction.create({
-      jurnal_id,
-      date,
-      description,
-      debit,
-      credit
+      jurnal_id, date, description, debit, credit
     });
 
     return res.send({
@@ -45,12 +41,33 @@ class TransactionController {
     });
   }
 
-  update(req: Request, res: Response): Response {
-    return res.send('Update transaction');
+  update = async (req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+    const { jurnal_id, date, description, debit, credit } = req.body;
+
+    const transaction = await db.transaction.update({
+      jurnal_id, date, description, debit, credit
+    }, {
+      where: { id }
+    });
+
+    return res.send({
+      data: transaction,
+      message: ''
+    });
   }
 
-  delete(req: Request, res: Response): Response {
-    return res.send('Delete transaction');
+  delete = async (req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+
+    await db.transaction.destroy({
+      where: { id }
+    })
+
+    return res.send({
+      data: '',
+      message: 'Data successfully deleted'
+    });
   }
 }
 

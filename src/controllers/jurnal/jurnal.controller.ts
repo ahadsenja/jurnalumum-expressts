@@ -6,12 +6,32 @@ const db = require('../../db/models');
 
 
 class JurnalController implements IController {
-  getAll(req: Request, res: Response): Response {
-    return res.send('Get All')
+  getAll = async (req: Request, res: Response): Promise<Response> => {
+    const { id } = req.app.locals.credential;
+
+    const jurnals = await db.jurnal.findAll({
+      where: { user_id: id },
+      attributes: ['id', 'name', 'description']
+    });
+
+    return res.send({
+      data: jurnals,
+      message: 'List of jurnals'
+    })
   }
 
-  getById(req: Request, res: Response): Response {
-    return res.send('Get by id')
+  getById = async (req: Request, res: Response): Promise<Response> => {
+    const { id: user_id } = req.app.locals.credential;
+    const { id } = req.params;
+
+    const jurnal = await db.jurnal.findOne({
+      where: { id, user_id }
+    });
+
+    return res.send({
+      data: jurnal,
+      message: ''
+    });
   }
 
   create = async (req: Request, res: Response): Promise<Response> => {
@@ -30,12 +50,35 @@ class JurnalController implements IController {
     })
   }
 
-  update(req: Request, res: Response): Response {
-    return res.send('Update')
+  update = async (req: Request, res: Response): Promise<Response> => {
+    const { id: user_id } = req.app.locals.credential;
+    const { id } = req.params;
+    const { name, description } = req.body;
+
+    await db.jurnal.update({
+      name, description
+    }, {
+      where: { id, user_id }
+    });
+
+    return res.send({
+      data: '',
+      message: 'Successfully updated jurnal'
+    })
   }
 
-  delete(req: Request, res: Response): Response {
-    return res.send('Delete')
+  delete = async (req: Request, res: Response): Promise<Response> => {
+    const { id: user_id } = req.app.locals.credential;
+    const { id } = req.params;
+
+    await db.jurnal.destroy({
+      where: { id, user_id }
+    })
+
+    return res.send({
+      data: '',
+      message: 'Data successfully deleted'
+    })
   }
 }
 

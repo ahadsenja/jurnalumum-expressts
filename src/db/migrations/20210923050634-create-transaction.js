@@ -8,6 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      jurnal_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'jurnals', key: 'id' },
+        allowNull: false
+      },
       date: {
         type: Sequelize.DATE
       },
@@ -15,10 +20,10 @@ module.exports = {
         type: Sequelize.TEXT
       },
       debit: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
       },
       credit: {
-        type: Sequelize.FLOAT
+        type: Sequelize.DECIMAL
       },
       created_at: {
         allowNull: false,

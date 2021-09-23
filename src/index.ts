@@ -8,6 +8,7 @@ import { config as dotenv } from 'dotenv';
 
 import UserRoutes from './routers/user/user.routes';
 import AuthRoutes from './routers/auth/auth.routes';
+import JurnalRoutes from './routers/jurnal/jurnal.routes';
 
 class App {
   public app: Application;
@@ -34,6 +35,7 @@ class App {
 
     this.app.use('/api/v1/users', UserRoutes);
     this.app.use('/api/v1/auth', AuthRoutes);
+    this.app.use('/api/v1/jurnals', JurnalRoutes);
   }
 }
 

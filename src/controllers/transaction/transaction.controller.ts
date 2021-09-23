@@ -14,8 +14,18 @@ class TransactionController {
     });
   }
 
-  getById(req: Request, res: Response): Response {
-    return res.send('Get by id transaction');
+  getById = async (req: Request, res: Response): Promise<Response> => {
+    const { id } = req.params;
+
+    const transaction = await db.transaction.findOne({
+      where: { id },
+      attributes: ['id', 'date', 'description', 'debit', 'credit', 'jurnal_id']
+    });
+
+    return res.send({
+      data: transaction,
+      message: ''
+    });
   }
 
   create = async (req: Request, res: Response): Promise<Response> => {

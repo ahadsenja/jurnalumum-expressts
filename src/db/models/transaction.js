@@ -11,13 +11,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      transaction.belongsTo(models.jurnal);
     }
   };
   transaction.init({
+    jurnal_id: DataTypes.INTEGER,
     date: DataTypes.DATE,
     description: DataTypes.TEXT,
-    debit: DataTypes.FLOAT,
-    credit: DataTypes.FLOAT
+    debit: DataTypes.DECIMAL,
+    credit: DataTypes.DECIMAL
   }, {
     sequelize,
     modelName: 'transaction',

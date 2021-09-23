@@ -1,24 +1,39 @@
 import { Request, Response } from 'express';
 
+const db = require('../../db/models');
+
 class TransactionController {
   getAll(req: Request, res: Response): Response {
-    return res.send('This is get all transaction method');
+    return res.send('Get all transaction');
   }
 
   getById(req: Request, res: Response): Response {
-    return res.send('This is get by id transaction method');
+    return res.send('Get by id transaction');
   }
 
-  create(req: Request, res: Response): Response {
-    return res.send('This is create transaction method');
+  create = async (req: Request, res: Response): Promise<Response> => {
+    const { jurnal_id, date, description, debit, credit } = req.body;
+
+    const transaction = await db.transaction.create({
+      jurnal_id,
+      date,
+      description,
+      debit,
+      credit
+    });
+
+    return res.send({
+      data: transaction,
+      message: 'Transaction successfully created'
+    });
   }
 
   update(req: Request, res: Response): Response {
-    return res.send('This is update transaction method');
+    return res.send('Update transaction');
   }
 
   delete(req: Request, res: Response): Response {
-    return res.send('This is delete transaction method');
+    return res.send('Delete transaction');
   }
 }
 

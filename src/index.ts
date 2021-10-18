@@ -1,4 +1,4 @@
-import express, { Application, Request, Response } from 'express';
+import express, { Application, NextFunction, Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import compression from 'compression';
@@ -43,6 +43,7 @@ class App {
 
 const port: number = 8000;
 const app = new App().app;
+
 app.listen(port, () => {
   console.log('This app is running on port ' + port);
 })

@@ -5,8 +5,10 @@ const db = require('../../db/models');
 class TransactionController {
   getAll = async (req: Request, res: Response): Promise<Response> => {
     const transactions = await db.transaction.findAll({
-      attributes: ['id', 'date', 'description', 'debit', 'credit', 'jurnal_id']
-    })
+      attributes: ['id', 'date', 'description', 'debit', 'credit'],
+      include: ['jurnal'],
+      order: [['id', 'ASC']]
+    });
 
     return res.send({
       data: transactions,
@@ -32,7 +34,11 @@ class TransactionController {
     const { jurnal_id, date, description, debit, credit } = req.body;
 
     const transaction = await db.transaction.create({
-      jurnal_id, date, description, debit, credit
+      jurnal_id,
+      date,
+      description,
+      debit,
+      credit
     });
 
     return res.send({
@@ -62,7 +68,7 @@ class TransactionController {
 
     await db.transaction.destroy({
       where: { id }
-    })
+    });
 
     return res.send({
       data: '',

@@ -11,7 +11,8 @@ class JurnalController implements IController {
 
     const jurnals = await db.jurnal.findAll({
       where: { user_id: id },
-      attributes: ['id', 'name', 'description']
+      attributes: ['id', 'name', 'description', 'user_id'],
+      order: [['id', 'ASC']]
     });
 
     return res.send({

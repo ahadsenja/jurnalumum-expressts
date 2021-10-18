@@ -32,6 +32,9 @@ class AuthController {
     // Generate token
     if (compare) {
       let token = Authentication.generateToken(user.id, username, user.password);
+
+      res.setHeader('Token', `Bearer ${token}`);
+
       return res.send({
         token
       });

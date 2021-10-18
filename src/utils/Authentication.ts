@@ -1,3 +1,4 @@
+import { Request } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -15,6 +16,7 @@ class Authentication {
     const secretKey: string = process.env.JWT_SECRET_KEY || 'rahasia';
 
     const token: string = jwt.sign({ id, username, password }, secretKey);
+    console.log('This token from Authentication file: ' + token);
     return token;
   }
 }
